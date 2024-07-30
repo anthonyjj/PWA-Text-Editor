@@ -14,6 +14,17 @@ plugins: [
   new MiniCssExtractPlugin(),
   new WorkboxPlugin.GenerateSW()
 ],
+
+new WebpackPwaManifest({
+  fingerprints: false,
+  inject: true,
+  name: "PWA Text Editor",
+  short_name: "JATE",
+  description: "Text Editor",
+  background_color: "#225ca3",
+  start_url: "/",
+  publicPath: "/",
+})
 // TODO: Add CSS loaders and babel to webpack.
 module: {
   rules: [
@@ -23,6 +34,11 @@ module: {
     }
   ]
 }
+
+new InjectManifest({
+  swSrc: "./src-sw,js",
+  swDest: "src-sw.js",
+}),
 
 module.exports = () => {
   return {
